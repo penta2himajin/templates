@@ -1,2 +1,43 @@
 # templates
-penta2himajin の各 repo で使う作業規約・テンプレート（CLAUDE.md / .claude/rules / Issue Template / handoff protocol）の中央リポジトリ
+
+Central repository for working conventions and templates used across penta2himajin's repos.
+
+## What this is
+
+- **Audience**: claude.ai / Claude Code sessions working on penta2himajin's projects, plus the human author.
+- **Role**: source of canonical text for `CLAUDE.md`, `.claude/rules/`, `.github/ISSUE_TEMPLATE/`, and PR templates.
+- **License**: MIT — reuse freely.
+
+Each template is a starting point. Consumer repos override as needed.
+
+## Layout
+
+| Path | Purpose |
+|---|---|
+| `.github/ISSUE_TEMPLATE/handoff.md` | Session-handoff issue template. Copy to consumer repos. Also active for this repo (dogfood). |
+| `.github/PULL_REQUEST_TEMPLATE.md` | PR template requiring `Closes #N` linkage. |
+| `claude-md/user-level.md` | Skeleton for `~/.claude/CLAUDE.md`. Common boilerplate (TDD, stream-timeout mitigation, commit conventions). |
+| `claude-md/project-skeleton.md` | Skeleton for project-root `CLAUDE.md`. |
+| `claude-rules/README.md` | When to use `.claude/rules/` vs `CLAUDE.md` vs skills. |
+| `claude-rules/examples/` | Path-scoped rule examples. |
+| `docs/handoff-protocol.md` | Detailed protocol for issue-based session handoff. |
+
+## How to use
+
+For a new repo:
+
+1. Copy `claude-md/project-skeleton.md` to the repo root as `CLAUDE.md` and fill in the placeholders.
+2. Copy `.github/ISSUE_TEMPLATE/handoff.md` and `.github/PULL_REQUEST_TEMPLATE.md` verbatim.
+3. Optionally pull `claude-rules/examples/*` into `.claude/rules/` and adjust globs.
+
+For an existing repo:
+
+- Adopt incrementally. Diff-merge against the existing `CLAUDE.md` rather than replacing wholesale.
+
+## SSOT precedence
+
+When templates here and consumer-repo files diverge, the consumer wins. Templates are descriptive, not authoritative. See `docs/handoff-protocol.md` for the full precedence rule.
+
+## License
+
+MIT. See `LICENSE`.
