@@ -1,5 +1,7 @@
 # templates
 
+[日本語](./README.ja.md)
+
 Central repository for working conventions and templates used across penta2himajin's repos.
 
 ## What this is
@@ -20,7 +22,9 @@ Each template is a starting point. Consumer repos override as needed.
 | `claude-md/project-skeleton.md` | Skeleton for project-root `CLAUDE.md`. |
 | `claude-rules/README.md` | When to use `.claude/rules/` vs `CLAUDE.md` vs skills. |
 | `claude-rules/examples/` | Path-scoped rule examples. |
+| `git-hooks/pre-push` | Shareable pre-push hook running format / lint / clippy. Install with `git config core.hooksPath git-hooks`. |
 | `docs/handoff-protocol.md` | Detailed protocol for issue-based session handoff. |
+| `docs/i18n-policy.md` | Suffix-file translation policy (`README.ja.md` next to `README.md`). |
 
 ## How to use
 
@@ -29,6 +33,8 @@ For a new repo:
 1. Copy `claude-md/project-skeleton.md` to the repo root as `CLAUDE.md` and fill in the placeholders.
 2. Copy `.github/ISSUE_TEMPLATE/handoff.md` and `.github/PULL_REQUEST_TEMPLATE.md` verbatim.
 3. Optionally pull `claude-rules/examples/*` into `.claude/rules/` and adjust globs.
+4. Copy `git-hooks/pre-push` into a `git-hooks/` directory in the consumer repo and run `git config core.hooksPath git-hooks`.
+5. If a Japanese audience is in scope, follow `docs/i18n-policy.md` to add `README.ja.md`.
 
 For an existing repo:
 

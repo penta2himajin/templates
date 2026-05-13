@@ -25,6 +25,13 @@ When a test fails, fix the production code — do not delete, skip, or weaken th
   ```
 
   Do not embed model name or session info in the trailer; put those in the commit body if needed.
+- **Pre-push hook**: each consumer repo installs the hook from `templates/git-hooks/pre-push` (or its own equivalent) via `git config core.hooksPath git-hooks`. The hook runs format / lint / clippy before every push. Tests are intentionally omitted — TDD keeps them green at commit time.
+
+## Pull Requests
+
+- **Always ready for review.** Open PRs in the "ready" state, never as drafts. Draft PRs do not fire review-requested events and slow the loop.
+- **Auto-subscribe after creating a PR.** Immediately after `create_pull_request` succeeds, call `subscribe_pr_activity` on the new PR without asking the user. Rationale: the user explicitly opted into the "Claude opens and watches its own PRs" workflow at the template level, so the per-PR confirmation is noise. Unsubscribe only when the user says to stop, when the PR merges, or when it is closed unmerged.
+- **One PR per workstream**, matching the handoff issue. Reference the issue with `Closes #N` per `.github/PULL_REQUEST_TEMPLATE.md`.
 
 ## Stream Idle Timeout Mitigation
 
