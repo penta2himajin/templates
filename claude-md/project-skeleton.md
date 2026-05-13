@@ -21,6 +21,9 @@ tests/       # ...
 ```bash
 # example
 cargo install ...
+
+# Pre-push hook (format / lint / clippy). Template at templates/git-hooks/pre-push.
+git config core.hooksPath git-hooks
 ```
 
 ## Build & Test
@@ -63,3 +66,11 @@ Long-running workstreams use GitHub issues for cross-session continuity. See [`t
 - Label: `session-handoff`
 - One issue per workstream (not per session)
 - On session start, read the relevant handoff issue and confirm the **Next action** with the user before executing.
+
+## Internationalisation
+
+If this project ships a Japanese-facing entry point, follow [`templates/docs/i18n-policy.md`](https://github.com/penta2himajin/templates/blob/main/docs/i18n-policy.md):
+
+- Translations are suffix files (`README.ja.md` next to `README.md`); no language directories.
+- Only `README.md` and the user-facing introduction tier of `docs/` are in scope. Engineering docs and ADRs stay English-only.
+- Each translated file carries a `> Source: <name>.md @ <sha>` header. PRs are never blocked on translation parity.
