@@ -25,14 +25,23 @@ penta2himajin のリポジトリ群で共通利用する作業規約とテンプ
 | `.rules/` | パススコープルール（該当ファイル読み込み時にオンデマンドでロード）。 |
 | `.claude/rules/` | `.rules/` へのシンボリックリンク。Claude Code 互換用。 |
 | `claude-rules/` | `.rules/` へのシンボリックリンク。後方互換用のレガシー名。 |
-| `AGENTS-project-skeleton.md` | プロジェクトルート `AGENTS.md` の雛形。 |
+| `AGENTS-project-skeleton.md` | プロジェクトルート `AGENTS.md` の雛形。`scripts/init-repo.sh` が `AGENTS.md` としてインストールする。 |
+| `scripts/init-repo.sh` | `../<name>/` に兄弟リポジトリをスキャフォールドする（コピー方式 B: skeleton → `AGENTS.md`、最小 README、シンボリックリンク、`git init`）。 |
 | `git-hooks/pre-push` | フォーマット / リント / clippy を実行する共有 pre-push フック。`git config core.hooksPath git-hooks` で有効化。 |
 | `docs/handoff-protocol.md` | Issue ベースのセッションハンドオフの詳細プロトコル。 |
 | `docs/i18n-policy.md` | サフィックス方式の翻訳ポリシー（`README.ja.md` を `README.md` の隣に置く）。 |
 
 ## 使い方
 
-新規リポジトリで使う場合:
+新規リポジトリ（推奨）:
+
+```bash
+./scripts/init-repo.sh my-app
+```
+
+このリポジトリのツリーから `../my-app/` を作成する（`.git/` と `scripts/` を除外）。`AGENTS-project-skeleton.md` を `AGENTS.md` としてインストールし、プロジェクト用の最小 `README.md` を書き、互換シンボリックリンク（`CLAUDE.md`、`.claude/rules`、`claude-rules`）を整え、`git init -b main`、`core.hooksPath=git-hooks`、Initial commit まで行う。次に `AGENTS.md` のプレースホルダを埋める。日本語読者を想定する場合は `docs/i18n-policy.md` に従って `README.ja.md` を追加する。
+
+手動コピー（既存 / 部分導入）:
 
 1. `AGENTS-project-skeleton.md` をリポジトリ直下に `AGENTS.md` としてコピーし、プレースホルダを埋める。
 2. `.github/ISSUE_TEMPLATE/handoff.md` と `.github/PULL_REQUEST_TEMPLATE.md` をそのままコピーする。

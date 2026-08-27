@@ -23,14 +23,23 @@ Each template is a starting point. Consumer repos override as needed.
 | `.rules/` | Path-scoped rules (loaded on demand when matching files are read). |
 | `.claude/rules/` | Symlink to `.rules/`. For Claude Code compatibility. |
 | `claude-rules/` | Symlink to `.rules/`. Legacy name, kept for backward compatibility. |
-| `AGENTS-project-skeleton.md` | Skeleton for project-root `AGENTS.md`. |
+| `AGENTS-project-skeleton.md` | Skeleton for project-root `AGENTS.md`. Installed as `AGENTS.md` by `scripts/init-repo.sh`. |
+| `scripts/init-repo.sh` | Scaffold a sibling repo under `../<name>/` (copy mode B: skeleton → `AGENTS.md`, minimal README, symlinks, `git init`). |
 | `git-hooks/pre-push` | Shareable pre-push hook running format / lint / clippy. Install with `git config core.hooksPath git-hooks`. |
 | `docs/handoff-protocol.md` | Detailed protocol for issue-based session handoff. |
 | `docs/i18n-policy.md` | Suffix-file translation policy (`README.ja.md` next to `README.md`). |
 
 ## How to use
 
-For a new repo:
+For a new repo (preferred):
+
+```bash
+./scripts/init-repo.sh my-app
+```
+
+This creates `../my-app/` from this tree (excluding `.git/` and `scripts/`), installs `AGENTS-project-skeleton.md` as `AGENTS.md`, writes a minimal project `README.md`, ensures compatibility symlinks (`CLAUDE.md`, `.claude/rules`, `claude-rules`), runs `git init -b main`, sets `core.hooksPath=git-hooks`, and creates an Initial commit. Fill in `AGENTS.md` placeholders next. If a Japanese audience is in scope, follow `docs/i18n-policy.md` to add `README.ja.md`.
+
+Manual copy (existing / partial adopt):
 
 1. Copy `AGENTS-project-skeleton.md` to the repo root as `AGENTS.md` and fill in the placeholders.
 2. Copy `.github/ISSUE_TEMPLATE/handoff.md` and `.github/PULL_REQUEST_TEMPLATE.md` verbatim.
